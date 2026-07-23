@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>AI Suggested Improvements</h2>
+
+<div class="improvement-box">
+    <div style="white-space: pre-line; line-height:1.8;">
+    {{ suggestions }}
+    </div>
+</div>
+
+<br>
+
+<a href="{{ url_for('dashboard') }}" class="btn btn-dark">
+    Back to Dashboard
+</a>
+
+{% endblock %}

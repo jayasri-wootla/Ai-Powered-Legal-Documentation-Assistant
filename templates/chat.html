@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="chat-wrapper">
+    <h2>💬 Chat With Your Contract</h2>
+
+    <div class="chat-box" id="chatBox">
+
+        {% if chat_history %}
+            {% for chat in chat_history %}
+                <div class="message user-message">
+                    <strong>You:</strong>
+                    <div style="white-space: pre-wrap;">
+                        {{ chat.question }}
+                    </div>
+                </div>
+
+                <div class="message ai-message">
+                    <strong>LegalGPT:</strong>
+                    <div style="white-space: pre-wrap;">
+                        {{ chat.answer }}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align:center; opacity:0.6;">
+                Ask your first question...
+            </p>
+        {% endif %}
+
+    </div>
+
+    <form method="POST" class="chat-input-area">
+        <input type="text" id="questionInput" name="question"
+               placeholder="Type or speak your question..." required>
+
+        <!-- 🎤 Voice Button -->
+        <button type="button" onclick="startVoice()" style="background:#334155;">
+            🎤
+        </button>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <div style="margin-top:15px;">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-dark">
+            Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+<!-- ✅ Auto Scroll Script -->
+<script>
+window.onload = function() {
+    const chatBox = document.getElementById("chatBox");
+    if (chatBox) {
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+};
+</script>
+
+<!-- ✅ Voice Script -->
+<script>
+function startVoice() {
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice recognition works best in Google Chrome.");
+        return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        document.getElementById("questionInput").value = transcript;
+    };
+
+    recognition.onerror = function(event) {
+        console.error("Speech recognition error:", event.error);
+    };
+}
+</script>
+
+{% endblock %}

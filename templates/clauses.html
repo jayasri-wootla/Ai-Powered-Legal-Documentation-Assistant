@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>📌 Detected Clauses</h2>
+
+    {% if clauses %}
+    <div style="line-height:1.8; font-size:16px; white-space: pre-line;">
+    {{ clauses }}
+    </div>
+    {% else %}
+        <p>No clauses detected.</p>
+    {% endif %}
+
+    <br>
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-dark">
+        Back to Dashboard
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="generate-wrapper">
+    <div class="generate-card">
+
+        <h2>Generate Legal Document (PDF)</h2>
+
+        <form method="POST" action="{{ url_for('generate_document_route') }}" class="generate-form">
+            
+            <label>Select Document Type:</label>
+            <select name="doc_type" required>
+                <option value="Rental Agreement">Rental Agreement</option>
+                <option value="Employment Contract">Employment Contract</option>
+                <option value="Non-Disclosure Agreement">Non-Disclosure Agreement</option>
+                <option value="Service Agreement">Service Agreement</option>
+            </select>
+
+            <label>Enter Details:</label>
+            <textarea name="details" rows="8"
+                placeholder="Enter party names, dates, duration, payment terms..."
+                required></textarea>
+
+            <button type="submit" id="generateBtn" class="btn btn-gradient">
+                <span id="btnText">Generate PDF</span>
+            </button>
+
+        </form>
+
+        <p style="margin-top:15px; font-size:14px; color:#94a3b8;">
+            The generated document will be downloaded in PDF format.
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

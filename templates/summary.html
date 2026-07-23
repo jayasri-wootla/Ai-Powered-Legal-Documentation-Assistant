@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>📑 Contract Summary</h2>
+
+    {% if summary %}
+    <div class="summary-content" style="white-space: pre-line;">
+        {{ summary }}
+    </div>
+    {% else %}
+        <p>No summary generated.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-dark">Back to Dashboard</a>
+</div>
+
+{% endblock %}

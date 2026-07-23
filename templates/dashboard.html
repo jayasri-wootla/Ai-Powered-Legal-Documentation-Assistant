@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Header -->
+<h2 style="margin-bottom: 30px;">Your Documents</h2>
+
+<!-- Upload Section -->
+<div class="document-card" style="margin-bottom: 40px;">
+    <h3 style="margin: 0; color: #e0f2fe;">Upload New Contract</h3>
+    
+    <form method="POST" enctype="multipart/form-data" style="display: flex; gap: 15px; align-items: center; margin-top: 15px; flex-wrap: wrap;">
+        <input type="file" name="file" accept="application/pdf" required>
+        <button type="submit" class="btn btn-gradient">Upload</button>
+    </form>
+</div>
+
+<!-- Uploaded Documents List -->
+{% for doc in documents %}
+    <div class="document-card">
+        
+        <div class="document-title">
+            📄 {{ doc.filename }}
+        </div>
+
+        <div class="button-group">
+            <a href="{{ url_for('generate_summary_route', doc_id=doc.id) }}" class="btn btn-blue">Summary</a>
+            <a href="{{ url_for('detect_clauses_route', doc_id=doc.id) }}" class="btn btn-green">Clauses</a>
+            <a href="{{ url_for('analyze_risk_route', doc_id=doc.id) }}" class="btn btn-orange">Risk</a>
+            <a href="{{ url_for('improvements', doc_id=doc.id) }}" class="btn btn-silver">Improvements</a>
+            <a href="{{ url_for('chat', doc_id=doc.id) }}" class="btn btn-purple">Chat</a>
+            <a href="{{ url_for('generate_report_route', doc_id=doc.id) }}" class="btn btn-silver">Report</a>
+        </div>
+
+    </div>
+{% else %}
+    <p style="color: #94a3b8; font-size: 16px;">No documents uploaded yet. Upload your first contract above!</p>
+{% endfor %}
+
+{% endblock %}

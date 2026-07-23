@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LegalDoc AI</title>
+    <!-- ✅ Cache Busting so browser loads the new CSS instantly -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}?v=5">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<nav class="navbar">
+    <!-- ✅ Logo Section -->
+    <div class="logo">
+        <div class="logo-main">⚖️ LegalDoc AI</div>
+        <div class="logo-tagline">AI Legal Documentation Assistant</div>
+    </div>
+
+    <!-- ✅ Navigation Links (Upgraded to look like buttons!) -->
+    <div class="nav-links">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About</a>
+
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('generate_page') }}" class="btn btn-gradient" style="padding: 8px 15px; font-size: 14px; margin-left: 15px;">+ Generate Document</a>
+            <a href="{{ url_for('logout') }}" style="margin-left: 15px;">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('signup') }}" class="btn btn-gradient" style="padding: 8px 15px; font-size: 14px; margin-left: 15px;">Sign Up</a>
+        {% endif %}
+    </div>
+</nav>
+
+<div class="container">
+    <!-- ✅ Glowing Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-container">
+                {% for message in messages %}
+                    <div class="flash-message">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+
+<!-- ✅ Fixed Loading Script (Button won't get stuck anymore!) -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.querySelector(".generate-form");
+
+    if (form) {
+        form.addEventListener("submit", function() {
+            const btn = document.querySelector(".generate-form button[type='submit']");
+            
+            if (btn) {
+                const originalText = btn.innerHTML;
+                
+                // Change to loading state
+                btn.innerHTML = "⏳ Generating...";
+                btn.style.opacity = "0.7";
+                btn.style.pointerEvents = "none"; // Prevents clicking but doesn't break form
+
+                // Reset button after 8 seconds 
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.opacity = "1";
+                    btn.style.pointerEvents = "auto";
+                }, 8000);
+            }
+        });
+    }
+});
+</script>
+
+</body>
+</html>

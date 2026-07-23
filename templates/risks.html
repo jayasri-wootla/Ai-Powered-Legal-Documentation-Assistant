@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <h2>⚠ Risk Analysis</h2>
+
+    {% if risks %}
+        {% for key, value in risks.items() %}
+            <div style="margin-bottom:20px;">
+                <h3 style="color:#f59e0b;">{{ key }}</h3>
+                <p style="white-space: pre-line;">{{ value }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No risks detected.</p>
+    {% endif %}
+
+    <a href="{{ url_for('dashboard') }}" class="btn btn-dark">
+        Back to Dashboard
+    </a>
+</div>
+
+{% endblock %}

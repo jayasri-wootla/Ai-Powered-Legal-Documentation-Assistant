@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2>Welcome to LegalDoc AI 👋</h2>
+        <p class="auth-subtitle">Login to access your legal documentation assistant</p>
+
+        <form method="POST" action="/login" class="auth-form mt-4">
+            <input type="text" name="username" placeholder="Username" required>
+            
+            <!-- ✅ Password field with Eye Toggle -->
+            <div class="password-container">
+                <input type="password" id="login-password" name="password" placeholder="Password" required>
+                <span class="toggle-password" onclick="toggleVisibility('login-password', this)">👁️</span>
+            </div>
+
+            <button type="submit" class="btn btn-gradient" style="width: 100%; margin-top: 10px;">Login</button>
+        </form>
+
+        <p class="auth-footer mt-3">
+            Don’t have an account?
+            <a href="{{ url_for('signup') }}">Create one</a>
+        </p>
+    </div>
+</div>
+
+<!-- ✅ Javascript for the eye icon -->
+<script>
+function toggleVisibility(inputId, icon) {
+    var input = document.getElementById(inputId);
+    if (input.type === "password") {
+        input.type = "text";
+        icon.innerText = "👁️"; 
+    } else {
+        input.type = "password";
+        icon.innerText = "🙈"; 
+    }
+}
+</script>
+
+{% endblock %}

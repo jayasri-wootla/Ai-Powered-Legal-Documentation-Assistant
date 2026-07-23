@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero">
+    <!-- ✅ The CSS will make this text glow beautifully -->
+    <h1>AI‑Powered Legal Documentation Assistant</h1>
+    <p>
+        LegalDoc AI helps you upload contracts, generate summaries,
+        detect clauses, analyze risks, and interact with your document intelligently.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="{{ url_for('signup') }}" class="btn btn-gradient">Get Started</a>
+        <a href="{{ url_for('login') }}" class="btn btn-dark">Login</a>
+    </div>
+</div>
+
+<div class="features">
+
+    <div class="feature-card">
+        <h3>📄 Contract Summary</h3>
+        <p>Generate concise summaries from lengthy contracts.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📑 Clause Detection</h3>
+        <p>Identify important clauses like termination and payment.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>⚠️ Risk Analysis</h3>
+        <p>Analyze possible legal risks in agreements.</p>
+    </div>
+
+    <div class="feature-card">
+    <h3>🛠 AI Improvements</h3>
+    <p>Get intelligent suggestions to strengthen your contract and reduce legal risk.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>💬 Legal Chatbot</h3>
+        <p>Ask questions about your uploaded contract.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📥 Report Download</h3>
+        <p>Generate and download a complete legal analysis report in one click.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📝 Document Generation</h3>
+        <p>Create professional legal documents instantly using AI.</p>
+    </div>
+
+</div>
+
+<!-- ✅ NEW: Elegant Footer -->
+<footer style="text-align: center; padding: 40px 20px; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); color: #94a3b8; font-size: 14px;">
+    <div style="font-weight: 600; margin-bottom: 5px; color: #cbd5e1;">⚖️ LegalDoc AI</div>
+    <p>Empowering professionals with AI-driven legal insights.</p>
+    <p style="margin-top: 15px; opacity: 0.6;">&copy; 2026 LegalDoc AI. All rights reserved.</p>
+</footer>
+
+{% endblock %}

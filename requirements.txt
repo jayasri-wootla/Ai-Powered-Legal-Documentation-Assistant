@@ -1,0 +1,10 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+Werkzeug
+groq
+python-docx
+Markdown
+python-dotenv
+PyPDF2
+reportlab
